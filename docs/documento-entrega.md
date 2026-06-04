@@ -7,8 +7,8 @@
 
 | Nome completo | Matrícula     |
 |---------------|---------------|
-| `<integrante 1>` | `<matrícula>` |
-| `<integrante 2>` | `<matrícula>` |
+| `<Samuel Magalhaes Marques>` | `<1332130>` |
+| `<Wilson de Morais>` | `<1332584>` |
 | `<integrante 3>` | `<matrícula>` |
 
 **Disciplina:** Estrutura de Dados — Avaliação N3
