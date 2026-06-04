@@ -1,0 +1,47 @@
+# ==========================================================================
+# .gitignore - Projeto Labirinto com Grafos (C ANSI)
+# ==========================================================================
+
+# ----- Executaveis gerados pela compilacao -----
+*.exe
+labirinto
+testes
+teste-som
+
+# ----- Objetos e bibliotecas intermediarias -----
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.out
+
+# ----- Arquivos de debug -----
+*.pdb
+*.ilk
+*.dSYM/
+
+# ----- Pasta de saida (caso o build gere uma) -----
+output/
+bin/
+build/
+Debug/
+Release/
+
+# ----- VS Code (manter c_cpp_properties.json e tasks.json eh opcional) -----
+# Descomente as linhas abaixo se NAO quiser versionar as configs locais:
+# .vscode/
+
+# ----- Arquivos temporarios de editores -----
+*~
+*.swp
+*.bak
+*.tmp
+
+# ----- Windows -----
+Thumbs.db
+desktop.ini
+
+# ----- macOS (caso alguem da equipe use Mac) -----
+.DS_Store
