@@ -9,6 +9,9 @@ REM   - test/: testes.c, teste-som.c
 REM   - bin/: executaveis
 REM =============================================================================
 
+REM Garantir que estamos na raiz do projeto
+cd /d "%~dp0"
+
 REM Criar pasta bin/ se nao existir
 if not exist "bin" mkdir bin
 
