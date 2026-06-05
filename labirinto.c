@@ -137,7 +137,7 @@ void resolverLabirinto(const Labirinto *lab, Resultado *res) {
     }
 
     /* Coloca a entrada na fila */
-    visitado[entrada.linha][entrada.coluna] = 1;
+    visitado[entrada.linha][entrada.coluna] = 1; 
     pai[entrada.linha][entrada.coluna] = entrada;
     fila[fim] = entrada;
     fim++;
