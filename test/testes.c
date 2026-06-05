@@ -12,7 +12,7 @@
  * ========================================================================== */
 #include <stdio.h>
 #include <assert.h>
-#include "labirinto.h"
+#include "../labirinto.h"
 
 /* Resultado grande fica fora da pilha. */
 static Resultado res;

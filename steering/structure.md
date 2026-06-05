@@ -6,6 +6,22 @@ Diretrizes sobre a **organização** do projeto.
 
 ```
 labirinto-grafo/
+│
+├── scripts/                     # AUTOMACAO (scripts para CI/CD)
+│   ├── README.md                #   documentacao dos scripts
+│   ├── limpar-projeto.bat       #   limpeza de temporarios
+│   └── ...
+│
+├── bin/                         # BINARIOS (gerados por build.bat)
+│   ├── labirinto.exe            #   programa compilado
+│   ├── testes.exe               #   testes compilados
+│   └── teste-som.exe            #   teste de audio isolado
+│
+├── test/                        # TESTES
+│   ├── testes.c                 #   8 testes unitarios (assert.h, C ANSI)
+│   ├── teste-som.c              #   3 testes de audio (Beep)
+│   └── run-tests.bat            #   script para rodar testes
+│
 ├── labirinto.h                  # Tipos (Posicao, Labirinto, Resultado) + assinaturas
 ├── labirinto.c                  # NUCLEO ANSI: carregar, exibir, localizar,
 │                                #   ehLivre, resolverLabirinto (BFS),
@@ -14,31 +30,42 @@ labirinto-grafo/
 ├── visualizacao.c               # Animacao + audio (Windows): threads, Beep,
 │                                #   reposicionamento de cursor
 ├── main.c                       # Menu e orquestracao (int main(void))
-├── testes.c                     # Bateria de testes (assert.h)
-├── teste-som.c                  # Diagnostico isolado do audio
-├── build.bat                    # Compila programa + testes
-├── run-tests.bat                # Compila e roda os testes
+│
+├── build.bat                    # Compila programa + testes → bin/
+│
 ├── .gitignore                   # Ignora executaveis e temporarios
 ├── .vscode/                     # Config do IntelliSense (caminho do gcc)
-├── README.md                    # Apresentacao e instrucoes
+│
+├── README.md                    # Apresentacao e instrucoes (UNICO .md NA RAIZ)
 ├── Planejamento.md              # Enunciado original do trabalho
+│
 ├── specs/                       # ESPECIFICACAO
 │   ├── requirements.md          #   o que o programa deve fazer
 │   ├── design.md                #   como foi projetado (decisoes)
 │   └── tasks.md                 #   tarefas e checklist
+│
 ├── steering/                    # DIRETRIZES
 │   ├── product.md               #   o que e o produto e para quem
 │   ├── tech.md                  #   como e construido (padrao, build)
 │   └── structure.md             #   este arquivo
-└── docs/                        # DOCUMENTOS DE APOIO E ENTREGA
-    ├── documento-entrega.md     #   documento exigido na entrega
-    ├── guia-apresentacao.md     #   roteiro para o teste de autoria
-    ├── checklist-entrega.md     #   conferencia dos requisitos
-    ├── roteiro-video.md         #   roteiro narrado do funcionamento
-    ├── explicacao-algoritmo.md  #   BFS e Dijkstra em detalhe
-    ├── exemplo-execucao.md      #   exemplo de saida
-    ├── testes.md                #   como os testes funcionam
-    └── glossario.md             #   termos de grafos e do codigo
+│
+├── docs/                        # DOCUMENTACAO DE APOIO E ENTREGA
+│   ├── documento-entrega.md     #   documento exigido (secao 11)
+│   ├── guia-apresentacao.md     #   roteiro para teste de autoria
+│   ├── checklist-entrega.md     #   conferencia dos requisitos
+│   ├── roteiro-video.md         #   roteiro narrado do funcionamento
+│   ├── explicacao-algoritmo.md  #   BFS e Dijkstra em detalhe
+│   ├── exemplo-execucao.md      #   exemplo de saida
+│   ├── testes.md                #   como os testes funcionam
+│   ├── glossario.md             #   termos de grafos e do codigo
+│   ├── branching-strategy.md    #   estrategia de branches Git
+│   ├── quick-start-branching.md #   guia rapido de Git
+│   └── INDEX.md                 #   indice central de docs
+│
+├── .github/                     # CONFIGURACAO DO GITHUB
+│   └── pull_request_template.md #   template automatico de PR
+│
+└── .git/                        # REPOSITORIO GIT
 ```
 
 ## Por que vários arquivos (módulos)?
