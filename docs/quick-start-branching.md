@@ -116,8 +116,8 @@ Adicionei 2 testes unitários para validar o algoritmo de Dijkstra:
 
 ## Como testar
 \`\`\`bash
-gcc -ansi -pedantic -Wall labirinto.c testes.c -o testes.exe
-testes.exe
+gcc -ansi -pedantic -Wall labirinto.c test/testes.c -o bin/testes.exe
+bin/testes.exe
 \`\`\`
 
 Esperado: 'TODOS OS TESTES PASSARAM COM SUCESSO!'
@@ -196,7 +196,7 @@ build → Build e compilação
 - [ ] Todos os arquivos foram staged? (`git status`)
 - [ ] A mensagem de commit é semântica? (feat/fix/docs/test/...)
 - [ ] O código compila sem avisos? (`gcc -ansi -pedantic -Wall ...`)
-- [ ] Os testes passam? (`testes.exe`)
+- [ ] Os testes passam? (`bin/testes.exe`)
 - [ ] A issue foi criada antes? (`gh issue create`)
 - [ ] O PR fecha a issue? (coloque `Closes #N` no body)
 
@@ -255,4 +255,4 @@ R: Se tem 3 commits: `git rebase -i HEAD~3` (mas isso é avançado).
 
 ## 🎓 Aprender Mais
 
-Leia [`BRANCHING_STRATEGY.md`](BRANCHING_STRATEGY.md) para a documentação completa.
+Leia `docs/branching-strategy.md` para a documentação completa.

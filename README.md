@@ -81,36 +81,64 @@ gcc -ansi -pedantic -Wall labirinto.c testes.c -o testes.exe
 
 ```
 labirinto-grafo/
-├── labirinto.h         # Tipos e assinaturas (nucleo ANSI)
-├── labirinto.c         # Logica: carregar, exibir, localizar, BFS, Dijkstra
-├── visualizacao.h      # Assinatura da animacao
-├── visualizacao.c      # Animacao passo a passo + audio (Windows)
-├── main.c              # Programa com menu (orquestracao)
-├── testes.c            # Bateria de testes (assert.h, C ANSI)
-├── teste-som.c         # Teste isolado de audio (diagnostico do Beep)
-├── build.bat           # Compila programa + testes (Windows)
-├── run-tests.bat       # Compila e roda os testes
-├── .gitignore          # Ignora executaveis e temporarios
-├── .vscode/            # Config do IntelliSense (c_cpp_properties.json)
-├── README.md           # Este arquivo
-├── Planejamento.md     # Enunciado original do trabalho
-├── specs/              # Especificação
-│   ├── requirements.md #   o que o programa deve fazer
-│   ├── design.md       #   como foi projetado (decisões)
-│   └── tasks.md        #   tarefas e checklist
-├── steering/           # Diretrizes do projeto
-│   ├── product.md      #   o que é o produto e para quem
-│   ├── tech.md         #   como é construído (padrão, build)
-│   └── structure.md    #   organização de arquivos e código
-└── docs/               # Documentos de apoio e entrega
-    ├── documento-entrega.md    # documento exigido na entrega
-    ├── guia-apresentacao.md    # roteiro para o teste de autoria
-    ├── checklist-entrega.md    # conferência dos requisitos
-    ├── roteiro-video.md        # roteiro narrado do funcionamento
-    ├── explicacao-algoritmo.md # BFS e Dijkstra em detalhe
-    ├── exemplo-execucao.md     # exemplo de saída
-    ├── testes.md               # como os testes funcionam
-    └── glossario.md            # termos de grafos e do código
+│
+├── CODIGO-FONTE (RAIZ)
+│   ├── labirinto.c         # Nucleo: BFS, Dijkstra
+│   ├── labirinto.h         # Tipos e assinaturas
+│   ├── visualizacao.c      # Animacao + audio (Windows)
+│   ├── visualizacao.h      # Assinatura da animacao
+│   ├── main.c              # Menu e orquestracao
+│   ├── build.bat           # Compila programa + testes → bin/
+│   ├── README.md           # Este arquivo
+│   ├── Planejamento.md     # Enunciado original
+│   ├── .gitignore          # Ignora executaveis
+│   └── .vscode/            # Config do IntelliSense
+│
+├── bin/                    # EXECUTAVEIS (gerados por build.bat)
+│   ├── labirinto.exe       # Programa compilado
+│   ├── testes.exe          # Testes compilados
+│   └── teste-som.exe       # Teste isolado de audio
+│
+├── test/                   # TESTES
+│   ├── testes.c            # 8 testes unitarios (assert.h, C ANSI)
+│   ├── teste-som.c         # Teste isolado de audio
+│   └── run-tests.bat       # Executa bin/testes.exe
+│
+├── scripts/                # SCRIPTS DE AUTOMACAO
+│   ├── auto-pr.ps1         # Git automatico (detecta diff → PR)
+│   ├── LIMPAR.ps1          # Limpeza de temporarios
+│   └── README.md           # Documentacao dos scripts
+│
+├── docs/                   # DOCUMENTACAO OFICIAL
+│   ├── documento-entrega.md      # Secao 11 do enunciado ⭐
+│   ├── guia-apresentacao.md      # Teste de autoria
+│   ├── checklist-entrega.md      # Conferencia de requisitos
+│   ├── explicacao-algoritmo.md   # BFS e Dijkstra
+│   ├── exemplo-execucao.md       # Exemplos de saida
+│   ├── testes.md                 # Documentacao dos testes
+│   ├── glossario.md              # Termos de grafos
+│   ├── roteiro-video.md          # Roteiro narrado
+│   ├── branching-strategy.md     # Estrategia de branches
+│   ├── quick-start-branching.md  # Git quick start
+│   ├── auto-pr-guide.md          # Guia do auto-pr.ps1
+│   ├── agents-plan.md            # Plano de agentes futuros
+│   ├── scripts-archive.md        # Todos os scripts
+│   └── batch-scripts-archive.md  # Scripts .bat documentados
+│
+├── specs/                  # ESPECIFICACOES
+│   ├── requirements.md     # Requisitos funcionais (RF-01 a RF-10)
+│   ├── design.md           # Design e arquitetura
+│   └── tasks.md            # Checklist de tarefas
+│
+├── steering/               # DIRETRIZES
+│   ├── product.md          # O que e o produto, para quem
+│   ├── tech.md             # Como e construido
+│   └── structure.md        # Organizacao de arquivos
+│
+├── .github/                # CONFIGURACAO GITHUB
+│   └── pull_request_template.md  # Template de PR
+│
+└── .git/                   # REPOSITORIO GIT
 ```
 
 ## Arquitetura (resumo)
@@ -126,16 +154,24 @@ labirinto-grafo/
 
 ## Documentos importantes
 
-- **Para a apresentação (teste de autoria):**
-  [`docs/guia-apresentacao.md`](docs/guia-apresentacao.md)
-- **Conferência dos requisitos:**
-  [`docs/checklist-entrega.md`](docs/checklist-entrega.md)
-- **Documento de entrega (preencher integrantes):**
+- **⭐ Para a entrega (Seção 11):**
   [`docs/documento-entrega.md`](docs/documento-entrega.md)
+- **Para o teste de autoria:**
+  [`docs/guia-apresentacao.md`](docs/guia-apresentacao.md)
+- **Checklist de requisitos:**
+  [`docs/checklist-entrega.md`](docs/checklist-entrega.md)
 - **Explicação dos algoritmos:**
   [`docs/explicacao-algoritmo.md`](docs/explicacao-algoritmo.md)
-- **Especificação:** [`specs/requirements.md`](specs/requirements.md),
-  [`specs/design.md`](specs/design.md), [`specs/tasks.md`](specs/tasks.md)
+- **Especificação:** 
+  [`specs/requirements.md`](specs/requirements.md),
+  [`specs/design.md`](specs/design.md),
+  [`specs/tasks.md`](specs/tasks.md)
+- **Estratégia de Git:**
+  [`docs/branching-strategy.md`](docs/branching-strategy.md),
+  [`docs/quick-start-branching.md`](docs/quick-start-branching.md)
+- **Scripts de Automação:**
+  [`scripts/auto-pr.ps1`](scripts/auto-pr.ps1),
+  [`docs/auto-pr-guide.md`](docs/auto-pr-guide.md)
 
 ## Integrantes
 
