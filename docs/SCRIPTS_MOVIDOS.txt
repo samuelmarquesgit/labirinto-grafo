@@ -1,0 +1,130 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         SCRIPTS MOVIDOS PARA \SCRIPTS                      ║
+║                                                                            ║
+║  Todos os arquivos .bat agora estão organizados em uma única pasta        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+⚠️ MUDANÇAS DE LOCALIZAÇÃO
+════════════════════════════════════════════════════════════════════════════
+
+Scripts que foram movidos de RAIZ para \SCRIPTS:
+
+  ❌ ANTES (Incorreto):
+     ├─ commit-cores.bat      (raiz - ERRADO)
+     └─ test-compile.bat      (raiz - ERRADO)
+
+  ✅ DEPOIS (Correto):
+     └─ scripts/
+        ├─ commit-cores.bat   (correto!)
+        ├─ test-compile.bat   (correto!)
+        ├─ auto-pr.ps1        (já estava aqui)
+        └─ LIMPAR.ps1         (já estava aqui)
+
+
+🚀 COMO USAR OS SCRIPTS (NOVOS COMANDOS)
+════════════════════════════════════════════════════════════════════════════
+
+TESTE RÁPIDO DE COMPILAÇÃO:
+  > .\scripts\test-compile.bat
+
+COMPILAÇÃO COMPLETA:
+  > .\build.bat
+
+EXECUTAR PROGRAMA:
+  > .\bin\labirinto.exe
+
+FAZER COMMIT DE MUDANÇAS:
+  > .\scripts\commit-cores.bat
+
+CRIAR PR AUTOMÁTICA:
+  > .\scripts\auto-pr.ps1 feat viz "Sistema de coloracao"
+
+LIMPEZA (novo):
+  > .\scripts\LIMPAR.ps1
+
+
+📋 ESTRUTURA CORRETA AGORA
+════════════════════════════════════════════════════════════════════════════
+
+labirinto-grafo/
+│
+├─ [SCRIPTS NA RAIZ]
+│  ├─ build.bat              ← Compilação principal
+│  ├─ .gitignore
+│  ├─ README.md
+│  └─ ... (código fonte)
+│
+└─ scripts/                   ← TODOS OS OUTROS SCRIPTS AQUI
+   ├─ auto-pr.ps1
+   ├─ commit-cores.bat        ← NOVO (movido)
+   ├─ test-compile.bat        ← NOVO (movido)
+   ├─ LIMPAR.ps1
+   └─ README.md
+
+
+✅ CHECKLIST DE LIMPEZA
+════════════════════════════════════════════════════════════════════════════
+
+Verificar se a raiz do projeto tem APENAS:
+
+  ✅ build.bat              (mantém aqui)
+  ❌ commit-cores.bat       (deletar se existir)
+  ❌ test-compile.bat       (deletar se existir)
+  ✅ main.c
+  ✅ labirinto.c
+  ✅ labirinto.h
+  ✅ visualizacao.c
+  ✅ visualizacao.h
+  ✅ README.md
+  ✅ .gitignore
+  ✅ ... (outros arquivos de código/docs)
+
+Se ainda há .bat na raiz (além de build.bat), execute:
+  > .\limpar-raiz.bat
+
+
+🔄 PARA ATUALIZAR SEUS PROCESSOS
+════════════════════════════════════════════════════════════════════════════
+
+Se você tem anotações/scripts que usam os nomes antigos:
+
+  ANTES:                          DEPOIS:
+  ─────────────────────────────   ─────────────────────────────
+  test-compile.bat               .\scripts\test-compile.bat
+  commit-cores.bat               .\scripts\commit-cores.bat
+
+
+📖 DOCUMENTAÇÃO ATUALIZADA
+════════════════════════════════════════════════════════════════════════════
+
+Consulte estes documentos para instruções atualizadas:
+
+  → COMECE_AQUI.txt               (já atualizado)
+  → docs/EXECUTOR_RESUMO_CORES.txt
+  → INDICE_CORES.md
+
+
+💾 PRÓXIMOS PASSOS
+════════════════════════════════════════════════════════════════════════════
+
+1. DELETAR SCRIPTS DA RAIZ:
+   > .\limpar-raiz.bat
+
+2. TESTAR NOVO LOCAL:
+   > .\scripts\test-compile.bat
+
+3. COMPILAR:
+   > .\build.bat
+
+4. TESTAR CORES:
+   > .\bin\labirinto.exe
+
+
+════════════════════════════════════════════════════════════════════════════
+
+Tudo organizado em \scripts !
+
+Lembre-se: sempre use .\scripts\ antes do nome do script
+
+════════════════════════════════════════════════════════════════════════════
