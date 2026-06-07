@@ -99,8 +99,9 @@ Ordem, de cima para baixo:
 ## Organização interna do `visualizacao.c`
 
 1. Funções de console: `limparTela`, `irParaTopo`, `cursorVisivel`, `esperar`.
-2. Áudio: `bip` (síncrono) e `bipAssincrono` (em *thread*, via `CreateThread`).
-3. `animarBusca` — orquestra as fases de exploração e de caminho.
+2. Cores: `definirCor`, `restaurarCor`, `exibirLabirintoComCores`.
+3. Áudio: `bip` (síncrono) e `bipAssincrono` (em *thread*, via `CreateThread`).
+4. `animarBusca` — orquestra as fases de exploração, caminho e cores finais.
 
 ## Princípios de organização
 

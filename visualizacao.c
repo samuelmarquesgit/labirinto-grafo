@@ -64,6 +64,67 @@ static void esperar(int ms) {
 #endif
 }
 
+/* Define a cor do proximo texto a ser impresso. */
+void definirCor(int cor) {
+#ifdef _WIN32
+    HANDLE saida = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(saida, cor);
+#else
+    (void)cor; /* sem suporte a cores em sistemas nao-Windows */
+#endif
+}
+
+/* Restaura a cor padrao (branco). */
+void restaurarCor(void) {
+    definirCor(7); /* COR_PADRAO */
+}
+
+/* Exibe o labirinto com coloracao especial dos caracteres:
+ *   E (entrada):   VERMELHO
+ *   S (saida):     VERDE
+ *   # (parede):    BRANCO (padrao)
+ *   : (visitado):  VERMELHO
+ *   * (caminho):   AZUL
+ *   . (livre):     BRANCO (padrao)
+ */
+static void exibirLabirintoComCores(const Labirinto *lab, int corAsterisco) {
+    int i, j;
+    char c;
+
+    for (i = 0; i < lab->numLinhas; i++) {
+        for (j = 0; j < lab->numColunas; j++) {
+            c = lab->grade[i][j];
+
+            switch (c) {
+                case 'E':  /* entrada */
+                    definirCor(12); /* VERMELHO */
+                    printf("%c", c);
+                    restaurarCor();
+                    break;
+                case 'S':  /* saida */
+                    definirCor(10); /* VERDE */
+                    printf("%c", c);
+                    restaurarCor();
+                    break;
+                case ':':  /* visitado na busca */
+                    definirCor(12); /* VERMELHO */
+                    printf("%c", c);
+                    restaurarCor();
+                    break;
+                case '*':  /* caminho */
+                    definirCor(corAsterisco);
+                    printf("%c", c);
+                    restaurarCor();
+                    break;
+                default:   /* parede, livre, ou outro */
+                    printf("%c", c);
+                    break;
+            }
+        }
+        printf("\n");
+    }
+}
+
 /* Emite um som de frequencia 'freq' (Hz) por 'ms' milissegundos.
  * O Beep e' bloqueante (trava o programa enquanto toca), entao a duracao
  * do som tambem serve de "pausa" entre os quadros. Usado nos sons finais. */
@@ -139,7 +200,7 @@ void animarBusca(const Labirinto *lab, const Resultado *res,
     if (!res->existeCaminho) {
         limparTela();
         cabecalho("Nao foi possivel resolver:");
-        exibirLabirinto(lab);
+        exibirLabirintoComCores(lab, 9);
         printf("\nNao existe caminho entre a entrada e a saida.\n");
         if (comAudio) {
             bip(200, 250); /* som grave de "erro" */
@@ -162,7 +223,7 @@ void animarBusca(const Labirinto *lab, const Resultado *res,
 
         irParaTopo();
         cabecalho("Explorando o labirinto (busca pelo menor caminho)...");
-        exibirLabirinto(&trabalho);
+        exibirLabirintoComCores(&trabalho, 9); /* 9 = AZUL */
         printf("\nVisitados: %d de %d   \n", i + 1, res->totalVisitados);
 
         /* Som a cada INTERVALO_SOM nos, tocado em paralelo (thread): a
@@ -175,7 +236,7 @@ void animarBusca(const Labirinto *lab, const Resultado *res,
         esperar(delayBusca);
     }
 
-    /* ----- Fase 2: animar o MENOR CAMINHO sendo desenhado ----- */
+    /* ----- Fase 2: animar o MENOR CAMINHO sendo desenhado (asterisco AZUL) ----- */
     for (i = 0; i < res->tamanhoCaminho; i++) {
         p = res->caminho[i];
 
@@ -186,7 +247,7 @@ void animarBusca(const Labirinto *lab, const Resultado *res,
 
         irParaTopo();
         cabecalho("Reconstruindo o MENOR caminho (entrada -> saida)...");
-        exibirLabirinto(&trabalho);
+        exibirLabirintoComCores(&trabalho, 9); /* 9 = AZUL enquanto reconstroi */
         printf("\nPasso %d de %d   \n", i, res->tamanhoCaminho - 1);
 
         /* tom subindo SUAVEMENTE a cada passo (incremento pequeno) e com teto
@@ -201,6 +262,11 @@ void animarBusca(const Labirinto *lab, const Resultado *res,
         /* a pausa do desenho mantem o ritmo, com ou sem audio */
         esperar(delayCaminho);
     }
+
+    /* ----- Exibir resultado FINAL com o caminho em VERDE ----- */
+    irParaTopo();
+    cabecalho(">>> CAMINHO ENCONTRADO! <<<");
+    exibirLabirintoComCores(&trabalho, 10); /* 10 = VERDE para o caminho final */
 
     cursorVisivel(1);
     printf("\n>>> Caminho encontrado! Quantidade de passos: %d\n", res->passos);
