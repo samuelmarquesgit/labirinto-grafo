@@ -24,6 +24,12 @@ didáticos.
 - Resolução por **BFS** e por **Dijkstra**.
 - **Modo estático**: mostra o labirinto original e o resolvido de uma vez.
 - **Modo animado**: desenha a exploração da busca passo a passo, em tempo real.
+- **Sistema de cores profissional**:
+  - 🔴 **Entrada (E)**: **Vermelho** — ponto de início
+  - 🔴 **Visitados (:)**: **Vermelho** — nós explorados durante a busca
+  - 🔵 **Caminho em reconstrução (\*)**: **Azul** — sendo desenhado
+  - 🟢 **Resultado final (\*)**: **Verde** — caminho completo
+  - 🟢 **Saída (S)**: **Verde** — ponto de destino
 - **Áudio opcional**: emite sons durante a animação (tocados em paralelo, numa
   *thread*, para não travar o desenho).
 - **Detecção de "sem caminho"**: avisa claramente quando não há rota.
@@ -68,14 +74,15 @@ gcc -ansi -pedantic -Wall labirinto.c testes.c -o testes.exe
 
 ## Legenda dos caracteres
 
-| Caractere | Significado                       |
-|-----------|-----------------------------------|
-| `#`       | Parede (bloqueado)                |
-| `.`       | Caminho livre                     |
-| `E`       | Entrada                           |
-| `S`       | Saída                             |
-| `:`       | Posição visitada (só na animação) |
-| `*`       | Caminho encontrado                |
+| Caractere | Significado | Cor (animação) |
+|-----------|-------------|---|
+| `#`       | Parede (bloqueado) | ⚪ Branco |
+| `.`       | Caminho livre | ⚪ Branco |
+| `E`       | Entrada | 🔴 **Vermelho** |
+| `S`       | Saída | 🟢 **Verde** |
+| `:`       | Posição visitada (fase 1) | 🔴 **Vermelho** |
+| `*` (fase 2) | Caminho sendo reconstruído | 🔵 **Azul** |
+| `*` (fase 3) | Caminho final (resultado) | 🟢 **Verde** |
 
 ## Estrutura do repositório
 
@@ -121,6 +128,8 @@ labirinto-grafo/
 │   ├── branching-strategy.md     # Estrategia de branches
 │   ├── quick-start-branching.md  # Git quick start
 │   ├── auto-pr-guide.md          # Guia do auto-pr.ps1
+│   ├── cores-visualizacao.md     # Sistema de cores (didatico) ✨
+│   ├── implementacao-cores.md    # Detalhes técnicos das cores
 │   ├── agents-plan.md            # Plano de agentes futuros
 │   ├── scripts-archive.md        # Todos os scripts
 │   └── batch-scripts-archive.md  # Scripts .bat documentados
@@ -151,6 +160,29 @@ labirinto-grafo/
 | `testes.c`       | Validação automática com `assert`                 | ✅ Sim  |
 
 \* `main.c` só chama a animação; a parte não-ANSI fica contida em `visualizacao.c`.
+
+## Sistema de Cores (Didáticas)
+
+O programa utiliza **cores profissionais** para facilitar a compreensão visual dos algoritmos:
+
+### As 3 Fases de Visualização
+
+**Fase 1 — Exploração (🔴 Vermelho)**
+- Caracteres `:` aparecem em vermelho conforme a busca expande
+- Cria um efeito visual de "onda" saindo da entrada
+
+**Fase 2 — Reconstrução do Caminho (🔵 Azul)**  
+- Asteriscos `*` aparecem em azul enquanto o caminho é desenhado
+- Mostra claramente qual é o menor caminho encontrado
+
+**Fase 3 — Resultado Final (🟢 Verde)**
+- O labirinto é exibido com o caminho completo em verde
+- **E** (entrada) permanece vermelha
+- **S** (saída) e todo o caminho `*` em verde
+
+### Documentação Completa de Cores
+- **Tutorial detalhado:** [`docs/cores-visualizacao.md`](docs/cores-visualizacao.md)
+- **Implementação técnica:** [`docs/implementacao-cores.md`](docs/implementacao-cores.md)
 
 ## Documentos importantes
 
