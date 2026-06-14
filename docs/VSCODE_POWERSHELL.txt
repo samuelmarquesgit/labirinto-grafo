@@ -1,0 +1,236 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    VS CODE + POWERSHELL — GUIA COMPLETO                    ║
+║                                                                            ║
+║              Scripts funcionando perfeitamente no VS Code!                 ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+⚠️ IMPORTANTE: VS CODE USA POWERSHELL (NÃO CMD.EXE)
+════════════════════════════════════════════════════════════════════════════
+
+VS Code está rodando PowerShell por padrão, não CMD.exe. Por isso comandos
+como 'findstr' e 'dir' podem não funcionar como esperado.
+
+SOLUÇÃO: Use os scripts em PowerShell (.ps1) em vez de .bat!
+
+
+✅ SCRIPTS DISPONÍVEIS NO VS CODE
+════════════════════════════════════════════════════════════════════════════
+
+PowerShell Scripts (para usar no VS Code):
+  ✓ .\scripts\test-compile.ps1     (teste rápido de compilação)
+  ✓ .\scripts\commit-cores.ps1     (faz commit automático)
+  ✓ .\scripts\auto-pr.ps1          (cria PR automática)
+  ✓ .\scripts\LIMPAR.ps1           (limpeza de temporários)
+
+Batch Scripts (para usar em CMD.exe fora do VS Code):
+  • .\build.bat                    (compilação principal - ainda funciona)
+
+
+🚀 COMANDOS PARA VS CODE (COM POWERSHELL)
+════════════════════════════════════════════════════════════════════════════
+
+1️⃣ TESTE RÁPIDO DE COMPILAÇÃO
+────────────────────────────────────────────────────────────────────────────
+
+No terminal do VS Code, execute:
+
+  PS > .\scripts\test-compile.ps1
+
+Resultado esperado:
+  ✅ OK - visualizacao.c compila sem erros
+
+
+2️⃣ COMPILAÇÃO COMPLETA
+────────────────────────────────────────────────────────────────────────────
+
+Para compilação completa, use o batch (funciona em PowerShell também):
+
+  PS > .\build.bat
+
+Resultado esperado:
+  ✅ [1/3] Compilando programa (labirinto.exe)...
+  ✅ [2/3] Compilando testes (testes.exe)...
+  ✅ [3/3] Compilando teste de audio (teste-som.exe)...
+
+
+3️⃣ EXECUTAR PROGRAMA
+────────────────────────────────────────────────────────────────────────────
+
+  PS > .\bin\labirinto.exe
+
+Resultado esperado:
+  🔴 Fase 1: Vermelho
+  🔵 Fase 2: Azul
+  🟢 Fase 3: Verde
+
+
+4️⃣ FAZER COMMIT AUTOMÁTICO
+────────────────────────────────────────────────────────────────────────────
+
+  PS > .\scripts\commit-cores.ps1
+
+Resultado esperado:
+  ✅ Commit realizado com sucesso!
+
+
+5️⃣ CRIAR PR AUTOMÁTICA
+────────────────────────────────────────────────────────────────────────────
+
+  PS > .\scripts\auto-pr.ps1 feat viz "Sistema de coloracao"
+
+Resultado esperado:
+  ✅ PR criada com sucesso!
+
+
+FLUXO COMPLETO (DO INÍCIO AO FIM)
+════════════════════════════════════════════════════════════════════════════
+
+No terminal do VS Code (PowerShell), execute na ordem:
+
+# 1. Teste rápido (verificar se gcc funciona)
+PS > .\scripts\test-compile.ps1
+
+# 2. Compilação completa
+PS > .\build.bat
+
+# 3. Testar o programa
+PS > .\bin\labirinto.exe
+#    (pressione 1 para BFS, observe as cores)
+
+# 4. Rodar testes unitários
+PS > .\test\run-tests.bat
+
+# 5. Fazer commit
+PS > .\scripts\commit-cores.ps1
+
+# 6. Fazer push
+PS > git push origin develop
+
+# 7. Criar PR automática
+PS > .\scripts\auto-pr.ps1 feat viz "Sistema de coloracao"
+
+# PRONTO! PR criada no GitHub! 🎉
+
+
+⚙️ CONFIGURAR VS CODE (OPCIONAL)
+════════════════════════════════════════════════════════════════════════════
+
+Se quiser usar CMD.exe em vez de PowerShell (alternativa):
+
+1. Abra VS Code
+2. Ctrl + , (abrir settings)
+3. Procure por: "terminal.integrated.shell.windows"
+4. Mude para:
+   C:\Windows\System32\cmd.exe
+
+OU deixe PowerShell (recomendado, agora que temos scripts .ps1)
+
+
+🔍 SOLUÇÃO DE PROBLEMAS
+════════════════════════════════════════════════════════════════════════════
+
+P: "Erro: scripts não são reconhecidos como comando"
+R: Use o caminho completo:
+   PS > .\scripts\test-compile.ps1  (com .\scripts\ antes)
+
+P: "Erro ao executar script PowerShell"
+R: Pode ser problema de execution policy. Execute:
+   PS > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+   PS > .\scripts\test-compile.ps1
+
+P: "gcc not found"
+R: Adicione MinGW ao PATH do Windows e reinicie VS Code
+
+P: "git not found"
+R: Instale Git for Windows
+   https://git-scm.com/download/win
+
+P: "gh command not found" (para PR)
+R: Instale GitHub CLI:
+   https://github.com/cli/cli/releases
+   Depois faça login: gh auth login
+
+
+📋 RESUMO DE COMANDOS POWERSHELL
+════════════════════════════════════════════════════════════════════════════
+
+Comando | Função | Resultado
+───────────────────────────────────────────────────────────────
+.\scripts\test-compile.ps1 | Teste compilação | ✅ gcc compila
+.\build.bat | Compila tudo | ✅ .exe gerado
+.\bin\labirinto.exe | Executa programa | 🎨 Cores aparecem
+.\test\run-tests.bat | Testes unitários | ✅ 8 testes passam
+.\scripts\commit-cores.ps1 | Faz commit | ✅ Git registra
+git push origin develop | Faz push | ✅ GitHub atualiza
+.\scripts\auto-pr.ps1 feat viz "..." | Cria PR | ✅ PR criada
+
+
+🎯 ATALHOS VS CODE (OPCIONAL)
+════════════════════════════════════════════════════════════════════════════
+
+Você pode criar tarefas no VS Code para executar scripts com Ctrl+Shift+B
+
+Arquivo: .vscode/tasks.json
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Teste Compilação",
+      "command": "${workspaceFolder}/scripts/test-compile.ps1",
+      "type": "shell",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Compilar (build.bat)",
+      "command": "cmd.exe",
+      "args": ["/c", "build.bat"],
+      "type": "shell",
+      "problemMatcher": [],
+      "group": "build"
+    }
+  ]
+}
+
+
+💡 DICAS
+════════════════════════════════════════════════════════════════════════════
+
+1. Sempre comece com: .\scripts\test-compile.ps1
+   Isso verifica se gcc está funcionando
+
+2. Se compilar com sucesso, pode rodar:
+   .\bin\labirinto.exe
+
+3. Para fazer PR:
+   .\scripts\auto-pr.ps1 feat viz "descrição da mudança"
+
+4. PowerShell é mais flexível que CMD, prefira .ps1 scripts
+
+
+✅ STATUS
+════════════════════════════════════════════════════════════════════════════
+
+✅ Scripts em PowerShell criados
+✅ Funcionam no VS Code
+✅ Sem comandos Unix/Linux
+✅ Tudo em português
+✅ Prontos para usar!
+
+
+🚀 PRÓXIMO PASSO
+════════════════════════════════════════════════════════════════════════════
+
+Abra o terminal do VS Code (Ctrl + `) e execute:
+
+PS > .\scripts\test-compile.ps1
+
+Você verá a confirmação que tudo funciona! ✨
+
+
+════════════════════════════════════════════════════════════════════════════
